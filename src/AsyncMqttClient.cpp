@@ -118,6 +118,11 @@ AsyncMqttClient& AsyncMqttClient::addServerFingerprint(const uint8_t* fingerprin
   _secureServerFingerprints.push_back(newFingerprint);
   return *this;
 }
+
+AsyncMqttClient& AsyncMqttClient::setPsk(const char* psk_ident, const char* psk) {
+  _client.setPsk(psk_ident, psk);
+  return *this;
+}
 #endif
 
 AsyncMqttClient& AsyncMqttClient::onConnect(AsyncMqttClientInternals::OnConnectUserCallback callback) {
@@ -177,7 +182,8 @@ void AsyncMqttClient::_clear() {
 void AsyncMqttClient::_onConnect(AsyncClient* client) {
   (void)client;
 
-#if ASYNC_TCP_SSL_ENABLED
+#if ASYNC_TCP_SSL_ENABLED && !defined(ESP32)
+  // Dunno how to check fingerprints using ESP32 version of AsyncTCP...
   if (_secure && _secureServerFingerprints.size() > 0) {
     SSL* clientSsl = _client.getSSL();
 

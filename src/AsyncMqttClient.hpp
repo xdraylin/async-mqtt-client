@@ -14,7 +14,9 @@
 #endif
 
 #if ASYNC_TCP_SSL_ENABLED
+#ifndef ESP32
 #include <tcp_axtls.h>
+#endif
 #define SHA1_SIZE 20
 #endif
 
@@ -55,6 +57,8 @@ class AsyncMqttClient {
 #if ASYNC_TCP_SSL_ENABLED
   AsyncMqttClient& setSecure(bool secure);
   AsyncMqttClient& addServerFingerprint(const uint8_t* fingerprint);
+  // setPsk causes a Pre-Shared Key cipher suite to be used
+  AsyncMqttClient& setPsk(const char* psk_ident, const char* psk); // psk is hex string
 #endif
 
   AsyncMqttClient& onConnect(AsyncMqttClientInternals::OnConnectUserCallback callback);
