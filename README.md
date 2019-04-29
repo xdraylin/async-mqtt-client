@@ -3,7 +3,7 @@ Async MQTT client for ESP8266 and ESP32
 
 This fork by TvE adds support for TLS with Pre-Shared Key cipher suites using
 the `mbed-tls` branch of https://github.com/tve/AsyncTCP.
-It also pulls in a number of PRs that @marvinroger seems to be too lazy to merge.
+It also pulls in a number of PRs that @marvinroger has yet to review/merge.
 
 [![Build Status](https://img.shields.io/travis/marvinroger/async-mqtt-client/master.svg?style=flat-square)](https://travis-ci.org/marvinroger/async-mqtt-client)
 
