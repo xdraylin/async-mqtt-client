@@ -360,7 +360,6 @@ void AsyncMqttClient::_onDisconnect(AsyncClient* client) {
     } else {
       reason = AsyncMqttClientDisconnectReason::TCP_DISCONNECTED;
     }
-
     for (auto callback : _onDisconnectUserCallbacks) callback(reason);
   }
   _clear();
@@ -496,9 +495,8 @@ void AsyncMqttClient::_onConnAck(bool sessionPresent, uint8_t connectReturnCode)
     _connected = true;
     for (auto callback : _onConnectUserCallbacks) callback(sessionPresent);
   } else {
-    _clear();
     for (auto callback : _onDisconnectUserCallbacks) callback(static_cast<AsyncMqttClientDisconnectReason>(connectReturnCode));
-     _disconnectFlagged = true;
+    _disconnectFlagged = true;
   }
 }
 
@@ -729,7 +727,6 @@ void AsyncMqttClient::disconnect(bool force) {
   } else {
     _disconnectFlagged = true;
     _sendDisconnect();
-    _client.send();
   }
 }
 
