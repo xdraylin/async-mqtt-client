@@ -23,7 +23,7 @@
     },
     {
       "name": "AsyncTCP",
-      "version": "^1.0.0",
+      "version": "https://github.com/fremouw/AsyncTCP#mbed-tls",
       "platforms": "espressif32"
     }
   ]
